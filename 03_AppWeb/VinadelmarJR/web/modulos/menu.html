@@ -1,0 +1,140 @@
+<div class="container-fluid">
+    <div class="row mt-3 mb-3">
+        <div class="col-sm-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title float-left mr-5">Men&uacute;</h4>
+                    <div class="btn-group float-left">
+                        <label for="txtbuscar" class=" text-dark text-center form-text m mt-2 mr-1">Buscar:</label>
+                        <input id="txtbuscar" type="text" class="" placeholder="Buscar por Nombre"   />
+                        <button id="btnbuscar" class="btn btn-sm btn-outline-dark mr-5" onclick="searchMenu();"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="btn-group float-right">
+                        <label for="selectFiltro" class="text-dark text-center form-text mt-2 mr-1">Filtrar por estatus:</label>
+                        <select id="selectFiltro" class="form-inline">
+                            <option value="0">Todos</option>
+                            <option value="2">Activo</option>
+                            <option value="1">Inactivo</option>
+                        </select>
+                        <button id="btnFiltro" class="btn btn-sm btn-outline-dark mr-5" onclick="filtrarMenu();"><i class="fa fa-filter"></i></button>
+                        <button id="btnAdd" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" disabled><i class="fa fa-plus"></i> Agregar</button>
+                        <button id="btnactulizar" class="btn btn-primary" onclick="imprimir('tblEmpleado');"><i class="fas fa-print"></i></button>
+                    </div>
+                </div>
+                <div id="tblMenu" class="card-body p-0 m-0">
+                    <table  class="table table-hover table-responsive-xl m-0">
+                        <thead class="bg-dark text-light">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Categor&iacute;a</th>
+                                <th scope="col">Descripci&oacute;n</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Estatus</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyMenu" class="bg-white">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success w-100 text-center" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="detalleForm" class="card-body">
+                    <div class="form">
+                        <form>
+                            <div class="form">
+
+                                <div class="form-group">
+                                    <label class="text-dark" for="txtNombre">Nombre</label>
+                                    <input id="txtNombre" type="text" class="form-control" required/>
+                                </div>
+                                
+                               <div class="form-group">
+                                <label class="text-dark" for="selectSexo">Categoria</label>
+                                <div class="input-group">
+                                    <div class="styled-select">
+                                        <select id="selectCategoria" class="form-inline">
+                                            <option value="1">Tostadas</option>
+                                            <option value="2">Ensaladas</option>
+                                            <option value="3">Cocteles</option>
+                                            <option value="4">Caldo y Sopas</option>
+                                            <option value="5">Aguachiles</option>
+                                            <option value="6">Pescado Frito</option>
+                                            <option value="7">Camarones</option>
+                                            <option value="8">Bebidas</option>
+                                           
+                                        </select>           
+                                    </div>
+                                </div>
+                            </div>
+                                
+                                <div class="form-group">
+                                    <label class="text-dark" for="txtDescripcion">Descripci&oacute;n</label>
+                                    <textarea id="txtDescripcion" class="form-control" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-dark" for="txtPrecio">Precio</label>
+                                    <input id="txtPrecio" type="number" class="form-control" required/>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="btn btn-mdb-color btn-rounded float-left">
+                                        <label>Seleccione imagen del platillo</label>
+                                        <div class=" " > 
+                                            <div  class="card ">
+                                                <div class="card border-dark">
+
+                                                    <div  class="card-header  bg-success text-white">                            
+                                                        <h4 id="pasos" class="text-center" >Imagen del platillo </h4>                              
+                                                    </div>
+                                                    <div id="dtscliente" class="card-body">
+                                                        <span id="descImg">
+                                                            sin imagen
+                                                            <br>
+                                                            <i class="fas fa-image"></i>
+                                                        </span>
+                                                        <img id="espacioimg" style="width: 100%;"/>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <input id="fileImage"
+                                               type="file" 
+                                               accept="image/png"
+                                               onchange="cargarFotografia(this);"/>
+                                        <input id="txtBase64" type="text" class="form-control" hidden>
+                                    </div>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="chkMenuActivo" checked>
+                                    <label class="form-check-label text-dark" for="chkMenuActivo">Activo</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button id="btnAddMenu" type="button" class="btn btn-primary" data-dismiss="modal" onclick="confirmarNuevoMenu();">Guardar</button>
+                        <button id="btnEditMenu" type="button" class="btn btn-primary" data-dismiss="modal" onclick="guardarEditMenu();">Guardar</button>
+                        <span id="contDinamico"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="style/js/script modulos/menu.js"></script>

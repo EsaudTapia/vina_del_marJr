@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div class="row mt-3 mb-3">
+        <div class="col-sm-6">
+
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title float-left mr-5"><i class="fa fa-file-alt"></i> Busquedas de Ventas</h4>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title float-left mr-5">Clientes</h4>
+                        <div class="btn-group float-left">
+                            <div class="card-pt-2 pl-2" style="border-color: #533f03"></div>
+                            <input id="txtBCliente" type="text" class="" placeholder="Buscar por Nombre"/>
+                            <button id="txtBCliente" class="btn btn-sm btn-outline-dark mr-5" onclick="buscarClientes();"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Nombre</td>
+                                    <td>Correo</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyclientes"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title float-left mr-5">Empleados</h4>
+                        <div class="btn-group float-left">
+                            <div class="card-pt-2 pl-2" style="border-color: #533f03"></div>
+                            <input id="txtBEmpleado" type="text" class="" placeholder="Buscar por Nombre"/>
+                            <button id="txtBEmpleado" class="btn btn-sm btn-outline-dark mr-5" onclick="buscarEmpleados();"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Nombre</td>
+                                    <td>Correo</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyempleados"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title float-left mr-5">Mercancia</h4>
+                        <div class="btn-group float-left">
+                            <div class="card-pt-2 pl-2" style="border-color: #533f03"></div>
+                            <input id="txtBMercancia" type="text" class="" placeholder="Buscar por Nombre"/>
+                            <button id="txtBMercancia" class="btn btn-sm btn-outline-dark mr-5" onclick="buscarMercancias();"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Nombre</td>
+                                    <td>Precio</td>
+                                    <td>Descripcion</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodymercancias"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title float-left mr-5"><i class="fa fa-shopping-cart text-success"></i> Generar Venta</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="style/js/script modulos/venta.js"></script>

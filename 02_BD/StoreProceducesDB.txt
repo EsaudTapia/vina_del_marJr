@@ -1,0 +1,219 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertCliente`( /*Parametros de entrada*/
+                                IN var_nombre VARCHAR(50),
+                                IN var_apellidoPaterno VARCHAR(40),
+                                IN var_apellidoMaterno VARCHAR(40),
+                                IN var_fechaNacimiento VARCHAR(11),
+								IN var_sexo VARCHAR(7),
+                                IN var_calle VARCHAR(40),
+                                IN var_numero VARCHAR(20),
+                                IN var_colonia VARCHAR(40),
+                                IN var_cp INT,
+                                IN var_ciudad VARCHAR(40),
+                                IN var_estado VARCHAR(40),
+                                IN var_tel VARCHAR(10),
+                               
+                                IN var_correo VARCHAR(50), 
+                                IN var_contrasenia	VARCHAR(50),
+                                /* Parametros de Retorno */
+								OUT var_idPersona INT,
+								OUT var_idCliente INT
+                                )
+BEGIN
+	-- Insertamos los datos de la tabla persona:
+            INSERT INTO persona (	nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento,sexo,
+									calle, numero, colonia, cp, ciudad, estado, tel ) 
+            VALUES (				var_nombre, var_apellidoPaterno, var_apellidoMaterno, 
+									var_fechaNacimiento,var_sexo,
+                                    var_calle, var_numero, var_colonia, 
+                                    var_cp, var_ciudad, var_estado, var_tel);
+                                    
+			-- Recuperamos el ID generado para persona:
+			SET var_idPersona = LAST_INSERT_ID();
+            
+            -- Insertamos los datos de la tabla cliente:
+            INSERT INTO cliente ( 	idPersona, correo, contrasenia)
+            VALUES (				var_idPersona, var_correo, var_contrasenia);
+            
+            -- Recuperamos el ID generado para cliente:
+			SET var_idCliente = LAST_INSERT_ID();
+END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertEmpleado`(/*Parametros de entrada*/
+                                IN var_nombre VARCHAR(50),
+                                IN var_apellidoPaterno VARCHAR(40),
+                                IN var_apellidoMaterno VARCHAR(40),
+                                IN var_fechaNacimiento VARCHAR(11),
+                                IN var_calle VARCHAR(40),
+                                IN var_numero VARCHAR(20),
+                                IN var_colonia VARCHAR(40),
+                                IN var_cp INT,
+                                IN var_ciudad VARCHAR(40),
+                                IN var_estado VARCHAR(40),
+                                IN var_tel VARCHAR(20),
+                                IN var_correo VARCHAR(50), 
+                                IN var_contrasenia	VARCHAR(50),
+                                /* Parametros de Retorno */
+								OUT var_idPersona INT,
+								OUT var_idEmpleado INT
+                                )
+BEGIN
+	-- Insertamos los datos de la tabla persona:
+            INSERT INTO persona (nombre, apellidoPaterno, 
+                                 apellidoMaterno, fechaNacimiento,
+								 calle, numero, colonia, cp, ciudad, 
+                                 estado, tel) 
+            VALUES (var_nombre, 
+                    var_apellidoPaterno, var_apellidoMaterno, 
+				     var_fechaNacimiento,
+                    var_calle, var_numero, var_colonia, var_cp, 
+                    var_ciudad, var_estado, var_tel);
+                                    
+			-- Recuperamos el ID generado para persona:
+			SET var_idPersona = LAST_INSERT_ID();
+            
+            -- Insertamos los datos de la tabla empleado:
+            INSERT INTO empleado ( 	idPersona, correo, contrasenia)
+            VALUES (				var_idPersona, var_correo, var_contrasenia);
+            
+            -- Recuperamos el ID generado para empleado:
+			SET var_idEmpleado = LAST_INSERT_ID();
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertMenu`( /*Parametros de entrada*/
+                                IN var_nombre VARCHAR(50),
+                                IN var_descripcion varchar(200),
+								IN var_precio double,
+                                IN var_foto longtext,
+                                IN var_categoria varchar(50),
+                                /* Parametros de Retorno */
+								OUT var_idCategoria INT,
+                                OUT var_idMenu INT
+                                )
+BEGIN
+	-- Insertamos los datos de la tabla categoria:
+            INSERT INTO categorias (	nombrecategoria) 
+            VALUES (				var_categoria);
+                                    
+			-- Recuperamos el ID generado para categoria:
+			SET var_idCategoria = LAST_INSERT_ID();
+            
+            -- Insertamos los datos de la tabla menu:
+            INSERT INTO menu ( 	idcategoria, nombre, descripcion, precio, foto)
+            VALUES (			var_idCategoria, var_nombre, var_descripcion, var_precio, var_foto);
+            
+            -- Recuperamos el ID generado para menu:
+			SET var_idMenu = LAST_INSERT_ID();
+END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `tokencliente`(in var_idCliente int, in var_token varchar (100))
+BEGIN
+update  cliente set token=var_token where idCliente=var_idCliente;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `tokenempleado`(in var_idCEmpleado int, in var_token varchar (100))
+BEGIN
+update  empleado set token=var_token where idEmpleado=var_idCEmpleado;
+END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateCliente`( /*Parametros de entrada*/
+								IN var_idCliente INT,
+                                IN var_nombre VARCHAR(50),
+                                IN var_apellidoPaterno VARCHAR(40),
+                                IN var_apellidoMaterno VARCHAR(40),
+                                IN var_fechaNacimiento VARCHAR(11),
+                                IN var_calle VARCHAR(40),
+                                IN var_numero VARCHAR(20),
+                                IN var_colonia VARCHAR(40),
+                                IN var_cp INT,
+                                IN var_ciudad VARCHAR(40),
+                                IN var_estado VARCHAR(40),
+                                IN var_tel VARCHAR(20)
+                                )
+BEGIN
+			-- Actualizamos los datos de la tabla persona:
+            UPDATE persona SET
+								nombre = var_nombre, 
+                                apellidoPaterno = var_apellidoPaterno,
+                                apellidoMaterno = var_apellidoMaterno,
+                                fechaNacimiento = var_fechaNacimiento,
+                                calle = var_calle,
+                                numero = var_numero,
+                                colonia = var_colonia, 
+                                cp = var_cp, 
+                                ciudad = var_ciudad, 
+                                estado = var_estado, 
+                                tel = var_tel
+			WHERE idPersona = (SELECT idPersona FROM cliente where idCliente = var_idCliente);
+            
+            -- Actualizamos los datos de la tabla Cliente:
+    END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateEmpleado`( /*Parametros de entrada*/
+								IN var_idEmpleado INT,
+                                IN var_nombre VARCHAR(50),
+                                IN var_apellidoPaterno VARCHAR(40),
+                                IN var_apellidoMaterno VARCHAR(40),
+                                IN var_fechaNacimiento VARCHAR(11),
+                                IN var_calle VARCHAR(40),
+                                IN var_numero VARCHAR(20),
+                                IN var_colonia VARCHAR(40),
+                                IN var_cp INT,
+                                IN var_ciudad VARCHAR(40),
+                                IN var_estado VARCHAR(40),
+                                IN var_tel VARCHAR(20),
+                                IN var_correo VARCHAR(50), 
+                                IN var_contrasenia	VARCHAR(50)
+                                )
+BEGIN
+			-- Actualizamos los datos de la tabla persona:
+            UPDATE persona SET
+								nombre = var_nombre, 
+                                apellidoPaterno = var_apellidoPaterno,
+                                apellidoMaterno = var_apellidoMaterno,
+                                fechaNacimiento = var_fechaNacimiento,
+                                calle = var_calle,
+                                numero = var_numero,
+                                colonia = var_colonia, 
+                                cp = var_cp, 
+                                ciudad = var_ciudad, 
+                                estado = var_estado, 
+                                tel = var_tel
+			WHERE idPersona = (SELECT idPersona FROM empleado where idEmpleado = var_idEmpleado);
+            
+            -- Actualizamos los datos de la tabla empleado:
+            UPDATE empleado SET
+								correo = var_correo,
+                                contrasenia = var_contrasenia
+			WHERE idEmpleado = var_idEmpleado;
+    END
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `updateMenu`( 
+											IN var_idMenu INT,
+											IN var_nombre VARCHAR(50),
+                                            IN var_categoria varchar(50),
+											IN var_descripcion varchar(200),
+											IN var_precio double,
+											IN var_foto longtext
+											
+                                )
+BEGIN
+			-- Actualizamos los datos de la tabla persona:
+            UPDATE categorias SET 
+							nombrecategoria = var_categoria 
+					WHERE idcategoria = (SELECT idcategoria FROM menu where idMenu = var_idMenu);
+            
+            -- Actualizamos los datos de la tabla Cliente:
+            UPDATE menu SET
+							nombre= var_nombre,
+                            descripcion= var_descripcion,
+                            precio= var_precio,
+                            foto= var_foto
+			    WHERE idMenu = var_idMenu;
+    END
+
+

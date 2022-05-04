@@ -1,0 +1,200 @@
+<div class="container-fluid">
+    <div class="row mt-3 mb-3">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title float-left mr-5">Clientes</h4>
+                    <div class="btn-group float-left">
+                        <label for="txtbuscar" class=" text-dark text-center form-text m mt-2 mr-1">Buscar:</label>
+                        <input id="txtbuscar" type="text" class="" placeholder="Buscar por Nombre"  />
+                        <button id="btnbuscar" class="btn btn-sm btn-outline-dark mr-5" onclick="searchClie();"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="btn-group float-right">
+                        <label for="selectFiltro" class="text-dark text-center form-text mt-2 mr-1">Filtrar por estatus:</label>
+                        <select id="selectFiltro" class="form-inline">
+                            <option value="0">Todos</option>
+                            <option value="2">Activo</option>
+                            <option value="1">Inactivo</option>
+                        </select>
+                        <button id="btnFiltro" class="btn btn-sm btn-outline-dark mr-5" onclick="filtrarCli();"><i class="fa fa-filter"></i></button>                        
+                        <button  class="btn btn-primary" onclick="imprimir('tblCliente');"><i class="fas fa-print"></i></button>
+                    </div>
+                </div>
+                <div id="tblCliente"  class=" card-body p-0 m-0 ">
+                    <table class="table table-responsive-xl table-hover m-0" >
+                        <thead class="bg-dark text-light" >
+                            <tr>                                
+                                <th scope="col">Nombre(s)</th>                                                              
+                                <th scope="col">Fecha de nacimiento    </th>                               
+                                <th scope="col">Correo Electronico    </th>
+                                <th scope="col">Telefono/Celular      </th>
+                                <th scope="col">Estatus               </th>
+                                <th scope="col">Acciones              </th>                                
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyclientes" class="bg-white">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-success w-100 text-center" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="detalleForm" class="card-body">
+                    <div class="form">
+                        <form>
+                            <div class="form">
+                    
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtNombre">Nombre(s)</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text "><i class="fas fa-user"></i></span>
+                                            </div>
+                                            <input id="txtnombre" type="text" class="form-control" required/>
+                                        </div>                                          
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtApellidoP">Apellido Paterno</label>
+                                        <input id="txtappellido_pat" type="text" class="form-control" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtApellidoM">Apellido Materno</label>                                        
+                                        <input id="txtappellido_mat" type="text" class="form-control" required/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtFechaNac">Fecha de nacimiento</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text "><i class="fas fa-calendar-alt"></i></span>
+                                            </div>
+                                            <input id="txtFecha_nac" type="date" class="form-control" required/>
+                                        </div>                                           
+                                    </div>                                                                                                           
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtCorreo">Correo Electronico</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text "><i class="fas fa-envelope"></i></span>
+                                            </div>
+                                            <input id="txtcorreo" type="email" class="form-control" required/>
+                                        </div>  
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtContrasenia">Contrase&ntilde;a</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text "><i class="fas fa-lock"></i></span>
+                                            <input id="txtContrasenia" type="password" class="form-control" required/>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">
+                                                    <i id="mostrarPassword" class="fa fa-eye" onclick="mostrarContrasenia();"></i>
+                                                    <i id="ocultarPassword" class="fa fa-eye-slash" onclick="ocultarContrasenia();"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>                                     
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txttelefono">Telefono/Celular</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text "><i class="fas fa-mobile-alt"></i></span>
+                                            </div>
+                                            <input id="txttelefono" type="tel" pattern="[0-9]{10}" class="form-control" required/>
+                                        </div>                                         
+                                    </div><br>
+                                    <h5><strong>DOMICILIO</strong></h5>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtCalle">Calle</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text "><i class="fas fa-map-marker-alt"></i></span>
+                                            </div>
+                                            <input id="txt_Calle" type="text" class="form-control" required/>
+                                        </div>                                         
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtnumero">numero</label>
+                                        <input id="txt_numero" type="number" class="form-control" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtColonia">Colonia</label>
+                                        <input id="txt_Colonia" type="text" class="form-control" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtCP">C.P</label>
+                                        <input id="txt_CP" type="number" class="form-control" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txtCiudad">Ciudad</label>
+                                        <input id="txt_Ciudad" type="text" class="form-control" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="text-dark" for="txt_Estado">Estado</label>
+                                        <div class="styled-select">
+                                            <select id="txt_Estado">
+                                                <option value="no">Seleccione uno...</option>
+                                                <option value="Aguascalientes">Aguascalientes</option>
+                                                <option value="Baja California">Baja California</option>
+                                                <option value="Baja California Sur">Baja California Sur</option>
+                                                <option value="Campeche">Campeche</option>
+                                                <option value="Chiapas">Chiapas</option>
+                                                <option value="Chihuahua">Chihuahua</option>
+                                                <option value="CDMX">Ciudad de México</option>
+                                                <option value="Coahuila">Coahuila</option>
+                                                <option value="Colima">Colima</option>
+                                                <option value="Durango">Durango</option>
+                                                <option value="Estado de México">Estado de México</option>
+                                                <option value="Guanajuato">Guanajuato</option>
+                                                <option value="Guerrero">Guerrero</option>
+                                                <option value="Hidalgo">Hidalgo</option>
+                                                <option value="Jalisco">Jalisco</option>
+                                                <option value="Michoacán">Michoacán</option>
+                                                <option value="Morelos">Morelos</option>
+                                                <option value="Nayarit">Nayarit</option>
+                                                <option value="Nuevo León">Nuevo León</option>
+                                                <option value="Oaxaca">Oaxaca</option>
+                                                <option value="Puebla">Puebla</option>
+                                                <option value="Querétaro">Querétaro</option>
+                                                <option value="Quintana Roo">Quintana Roo</option>
+                                                <option value="San Luis Potosí">San Luis Potosí</option>
+                                                <option value="Sinaloa">Sinaloa</option>
+                                                <option value="Sonora">Sonora</option>
+                                                <option value="Tabasco">Tabasco</option>
+                                                <option value="Tamaulipas">Tamaulipas</option>
+                                                <option value="Tlaxcala">Tlaxcala</option>
+                                                <option value="Veracruz">Veracruz</option>
+                                                <option value="Yucatán">Yucatán</option>
+                                                <option value="Zacatecas">Zacatecas</option>
+                                            </select>
+                                        </div>
+                                    </div>                                                                   
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="chkClienteActivo">
+                                        <label class="form-check-label text-dark" for="chkClienteActivo">Activo</label>
+                                    </div>
+                                    <input type="submit" hidden/>
+                                </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button id="btnAddCliente" type="button" class="btn btn-primary" data-dismiss="modal" onclick="confirmarNuevoCliente();">Guardar</button>
+                        <span id="contDinamico"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="style/js/script modulos/clientes.js"></script>

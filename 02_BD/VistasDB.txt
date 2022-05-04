@@ -1,0 +1,71 @@
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_menu` AS
+    SELECT 
+        `m`.`idMenu` AS `idMenu`,
+        `m`.`nombre` AS `nombre`,
+        `m`.`descripcion` AS `descripcion`,
+        `m`.`precio` AS `precio`,
+        `m`.`foto` AS `foto`,
+        `m`.`estatus` AS `estatus`,
+        `c`.`idcategoria` AS `idcategoria`,
+        `c`.`nombrecategoria` AS `nombrecategoria`
+    FROM
+        (`menu` `m`
+        JOIN `categorias` `c` ON ((`m`.`idcategoria` = `c`.`idcategoria`)))
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_empleados` AS
+    SELECT 
+        `p`.`idPersona` AS `idPersona`,
+        `p`.`nombre` AS `nombre`,
+        `p`.`apellidoPaterno` AS `apellidoPaterno`,
+        `p`.`apellidoMaterno` AS `apellidoMaterno`,
+        `p`.`fechaNacimiento` AS `fechaNacimiento`,
+        `p`.`calle` AS `calle`,
+        `p`.`numero` AS `numero`,
+        `p`.`colonia` AS `colonia`,
+        `p`.`cp` AS `cp`,
+        `p`.`ciudad` AS `ciudad`,
+        `p`.`estado` AS `estado`,
+        `p`.`tel` AS `tel`,
+        `p`.`estatus` AS `estatus`,
+        `c`.`idEmpleado` AS `idEmpleado`,
+        `c`.`correo` AS `correo`,
+        `c`.`contrasenia` AS `contrasenia`
+    FROM
+        (`empleado` `c`
+        JOIN `persona` `p` ON ((`c`.`idPersona` = `p`.`idPersona`)))
+
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `v_clientes` AS
+    SELECT 
+        `p`.`idPersona` AS `idPersona`,
+        `p`.`nombre` AS `nombre`,
+        `p`.`apellidoPaterno` AS `apellidoPaterno`,
+        `p`.`apellidoMaterno` AS `apellidoMaterno`,
+        `p`.`sexo` AS `sexo`,
+        `p`.`fechaNacimiento` AS `fechaNacimiento`,
+        `p`.`calle` AS `calle`,
+        `p`.`numero` AS `numero`,
+        `p`.`colonia` AS `colonia`,
+        `p`.`cp` AS `cp`,
+        `p`.`ciudad` AS `ciudad`,
+        `p`.`estado` AS `estado`,
+        `p`.`tel` AS `tel`,
+        `p`.`estatus` AS `estatus`,
+        `c`.`idCliente` AS `idCliente`,
+        `c`.`correo` AS `correo`,
+        `c`.`contrasenia` AS `contrasenia`
+    FROM
+        (`persona` `p`
+        JOIN `cliente` `c` ON ((`p`.`idPersona` = `c`.`idPersona`)))

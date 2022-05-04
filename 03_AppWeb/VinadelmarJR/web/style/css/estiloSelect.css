@@ -1,0 +1,20 @@
+.styled-select select {
+    background: #ffffff;
+    width: 268px;
+    padding: 5px;
+    font-size: 16px;
+
+    border: 0;
+    border-radius: 0;
+    height: 34px;
+    -webkit-appearance: none;
+    -moz-appearance:none;
+    appearance: none;
+}
+
+.styled-select {
+    width: 271px;
+    height: 43px;
+    overflow: hidden;
+    border: 0;
+}

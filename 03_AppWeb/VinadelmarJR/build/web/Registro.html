@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="style/media/img/logo.png" type="image/png" sizes="16x16">
+        <link rel="stylesheet" href="style/bootstrap 4.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style/css/all.min.css">
+        <link rel="stylesheet" href="style/sweetalert2/sweetalert2.min.css">
+        <link href="style/css/estiloSelect.css" rel="stylesheet" type="text/css"/>
+        <link href="style/css/estiloFooter.css" rel="stylesheet" type="text/css"/>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    </head>
+    <body >
+
+        <div class="jumbotron p-3 m-0 container-fluid ">                                               
+            <h3 id="tituloScreen"  class="card-text text-center text-primary"> Registrar clientes</h3>
+        </div>                      
+        <div class="container-fluid row ">
+            <div class=" col-7 ">
+                <div id="detalleForm" class="card-body">
+                    <div class="form">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="text-dark" for="txtNombre">Nombre Completo</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text "><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input id="txtnombre" type="text" class="form-control" placeholder="Nombre(s)" required/>
+                                </div>                                          
+                            </div>
+                            <div class="form-inline"><abbr>
+                                    <input id="txtappellido_pat" type="text" class="form-control" placeholder="Apellido Paterno" required/>
+                                    <input id="txtappellido_mat" type="text" class="form-control"  placeholder="Apellido Materno" required/>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="text-dark" for="selectSexo">Sexo</label>
+                                <div class="input-group">
+                                    <span class="input-group-text "><i class="fas fa-venus-mars"></i></span>
+                                    <div class="styled-select">
+                                        <select id="selectSexo" class="form-inline">
+                                            <option value="Hombre">Hombre</option>
+                                            <option value="Mujer">Mujer</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>           
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="text-dark" for="txtFecha_nac">Fecha de nacimiento</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text "><i class="fas fa-calendar-alt"></i></span>
+                                    </div>
+                                    <input id="txtFecha_nac" type="date" class="form-control" required/>
+                                </div>                                           
+                            </div>                                                                                                           
+                            <div class="form-group">
+                                <label class="text-dark" for="txtCorreo">Correo Electronico</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text "><i class="fas fa-envelope"></i></span>
+                                    </div>
+                                    <input id="txtcorreo" type="email" class="form-control" required/>
+                                </div>  
+                            </div>
+                            <div class="form-group">
+                                <label class="text-dark" for="txtContrasenia">Contrase&ntilde;a</label>
+                                <div class="input-group">
+                                    <span class="input-group-text "><i class="fas fa-lock"></i></span>
+                                    <input id="txtContrasenia" type="password" class="form-control" required/>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i id="mostrarPassword" class="fa fa-eye" onclick="mostrarContrasenia();"></i>
+                                            <i id="ocultarPassword" class="fa fa-eye-slash" onclick="ocultarContrasenia();"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="form-group">
+                                <label class="text-dark" for="txtTel">Telefono/Celular</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text "><i class="fas fa-mobile-alt"></i></span>
+                                    </div>
+                                    <input id="txttelefono" type="tel" pattern="[0-9]{10}" class="form-control" required/>
+                                </div>                                         
+                            </div><br/>
+                            <h5><strong>DOMICILIO</strong></h5> 
+                            <div class="form-group">
+                                <label class="text-dark" for="txtCalle">Calle</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text "><i class="fas fa-map-marker-alt"></i></span>
+                                    </div>
+                                    <input id="txt_Calle" type="text" class="form-control" required/>
+                                </div>                                         
+                            </div>
+                            <div class="form-inline"><abbr>
+                                    <input id="txt_numero" type="number" class="form-control p-2" placeholder="Numero" required/><abbr>
+                                        <input id="txt_Colonia" type="text" class="form-control" placeholder="Colonia" required/><abbr>
+                                            <input id="txt_CP" type="number" class="form-control" placeholder="Codigo Postal" required/><abbr>
+                                                </div><br>
+
+                                                <div class="form-group ">
+                                                    <label for="txt_Estado">Estado</label>
+                                                    <div class="styled-select">
+                                                        <select id="txt_Estado" style="border-color: #062c33">
+                                                            <option value="no">Seleccione uno...</option>
+                                                            <option value="Aguascalientes">Aguascalientes</option>
+                                                            <option value="Baja California">Baja California</option>
+                                                            <option value="Baja California Sur">Baja California Sur</option>
+                                                            <option value="Campeche">Campeche</option>
+                                                            <option value="Chiapas">Chiapas</option>
+                                                            <option value="Chihuahua">Chihuahua</option>
+                                                            <option value="CDMX">Ciudad de México</option>
+                                                            <option value="Coahuila">Coahuila</option>
+                                                            <option value="Colima">Colima</option>
+                                                            <option value="Durango">Durango</option>
+                                                            <option value="Estado de México">Estado de México</option>
+                                                            <option value="Guanajuato">Guanajuato</option>
+                                                            <option value="Guerrero">Guerrero</option>
+                                                            <option value="Hidalgo">Hidalgo</option>
+                                                            <option value="Jalisco">Jalisco</option>
+                                                            <option value="Michoacán">Michoacán</option>
+                                                            <option value="Morelos">Morelos</option>
+                                                            <option value="Nayarit">Nayarit</option>
+                                                            <option value="Nuevo León">Nuevo León</option>
+                                                            <option value="Oaxaca">Oaxaca</option>
+                                                            <option value="Puebla">Puebla</option>
+                                                            <option value="Querétaro">Querétaro</option>
+                                                            <option value="Quintana Roo">Quintana Roo</option>
+                                                            <option value="San Luis Potosí">San Luis Potosí</option>
+                                                            <option value="Sinaloa">Sinaloa</option>
+                                                            <option value="Sonora">Sonora</option>
+                                                            <option value="Tabasco">Tabasco</option>
+                                                            <option value="Tamaulipas">Tamaulipas</option>
+                                                            <option value="Tlaxcala">Tlaxcala</option>
+                                                            <option value="Veracruz">Veracruz</option>
+                                                            <option value="Yucatán">Yucatán</option>
+                                                            <option value="Zacatecas">Zacatecas</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="text-dark" for="txtCiudad">Ciudad</label>
+                                                    <input id="txt_Ciudad" type="text" class="form-control" required/>
+                                                </div>
+                                                <input type="submit" hidden/>
+                                                </div>
+                                                </div>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="mostrarLogin()">Cerrar</button>
+                                                <button id="btnAddCliente" type="button" class="btn btn-primary" data-dismiss="modal" onclick="confirmarNuevoCliente();">Terminar Registro</button>
+                                                <span id="contDinamico"></span>
+                                                </div>
+                                                </div>
+                                                <div class="col-5 p-4">
+                                                    <div class="card">
+                                                        <h3 class="card-header text-center"><strong style="text-transform: uppercase; text-height: " >Viña del Mar jr</strong></h3>
+                                                        <div class="card-body align-content-center">
+                                                            <div class="">
+                                                                <img class="img-fluid "   src="style/media/img/logo.png"/>
+                                                            </div><br>
+                                                            <h3><strong style="text-transform: uppercase; text-height: " class="card-title">Te agradecemos tu preferencia</strong></h3>
+                                                            <p>Viña del mar es un restaurant enfocado a comida del mar,te invitamos a disfrutar de nuestro 
+                                                                platillos, que te haran setirte en la playa.</p>
+                                                        </div>
+                                                    </div>               
+                                                </div>
+                                                </div>
+                                               
+                                                <footer id="dk-footer" class="dk-footer">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-lg-4">
+                                                                <div class="dk-footer-box-info">
+                                                                    <a href="index.html" class="footer-logo">
+                                                                        <img src="style/media/img/logo.png" height="200px" width="200px" alt="footer_logo" class="img-fluid">
+                                                                    </a>
+                                                                    <div class="footer-social-link">
+                                                                        <h3>Siguenos</h3>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="#https://www.facebook.com/vinadelmarmariscos/">
+                                                                                    <i class="fa fa-facebook"></i>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="#https://www.instagram.com/vinadelmar.mx/?fbclid=IwAR0Ohis86AAlbUo7FnKjko1SEfeqLd79XZecX6R-HHXxecdcmGOqJnbe0NM">
+                                                                                    <i class="fa fa-instagram"></i>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="footer-awarad">
+                                                                    <p>Viña del Mar Jr</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 col-lg-8">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="contact-us">
+                                                                            <div class="contact-icon">
+                                                                                <i class="fa fa-map-o" aria-hidden="true"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="contact-us contact-us-last">
+                                                                            <div class="contact-icon">
+                                                                                <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12 col-lg-6">
+                                                                        <div class="footer-widget footer-left-widget">
+                                                                            <div class="section-heading">
+                                                                                <h3>Dirección</h3>
+                                                                                <span class="animate-border border-black"></span>
+                                                                            </div>
+                                                                            <div class="text-light">
+                                                                                <p>Blvrd Vicente Valtierra 4301, San Miguel de Renteria Nte, 37256 León, Gto.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12 col-lg-6">
+                                                                        <div class="footer-widget">
+                                                                            <div class="section-heading">
+                                                                                <h3>Contacto</h3>
+                                                                                <span class="animate-border border-black"></span>
+                                                                            </div>
+                                                                            <form action="#">
+                                                                                <div class="form-row">
+                                                                                    <div class="col dk-footer-form">
+                                                                                        <input type="email" class="form-control" placeholder="Email Address">
+                                                                                        <button type="submit" >
+                                                                                            <i class="fa fa-send "></i>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="copyright">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <span>Copyright © 2021, All Right Reserved Seobin</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </footer>
+                                                <script type="text/javascript" src="style/js/jquery/jquery-3.5.1.min.js"></script>
+                                                <script type="text/javascript" src="style/bootstrap 4.5/js/bootstrap.min.js"></script>
+                                                <script type="text/javascript" src="style/js/principal.js"></script>
+                                                <script type="text/javascript" src="style/js/sanitizar.js"></script>
+                                                <script type="text/javascript" src="style/js/script modulos/clientes.js"></script>
+                                                <script type="text/javascript" src="style/sweetalert2/sweetalert2.min.js"></script>
+                                                </body>
+                                                </html>
